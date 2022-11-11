@@ -1,23 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
 
-function App() {
+import PersonForm from "./components/PersonForm";
+import ItemForm from "./components/ItemForm";
+import ResultsPage from "./components/ResultPage";
+
+const App = () => {
+
+  const [pageState, setPageState] = useState('AddPeople');
+  const [personList, setPersonList] = useState(['']);
+  const [itemList, setItemList] = useState(
+    [{ 'name': '', 'cost': '', 'owner': [] }]
+  );
+  const [addedCharges, setAddedCharges] = useState(
+    { 'tax': '', 'tip': '' }
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='w3-container'>
+      <h1 className='w3-green w3-center'>Tab Splitter</h1>
+      <div className='w3-container'>
+        {pageState === 'AddPeople' &&
+          <PersonForm
+            personList={personList}
+            setPersonList={setPersonList}
+            setPageState={setPageState}
+          />
+        }
+        {pageState === 'AddItems' &&
+          <ItemForm
+            itemList={itemList}
+            setItemList={setItemList}
+            personList={personList}
+            addedCharges={addedCharges}
+            setAddedCharges={setAddedCharges}
+            setPageState={setPageState}
+          />
+        }
+        {pageState === 'ViewResults' &&
+          <ResultsPage
+            itemList={itemList}
+            personList={personList}
+            addedCharges={addedCharges}
+          />
+        }
+      </div>
     </div>
   );
 }
