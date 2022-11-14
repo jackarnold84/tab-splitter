@@ -1,5 +1,19 @@
+/* font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700&display=swap');
+
+body,h1,h2,h3,h4,h5,h6 {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* defaults */
 label {
   white-space:nowrap
+}
+
+/* custom */
+.x3-fit-width {
+  margin: auto;
+  max-width: 800px;
 }
 
 .x3-green {
@@ -36,4 +50,20 @@ label {
 .x3-tip-pct {
   margin-left: 8px;
   font-style: italic;
+}
+
+.x3-charge-table {
+  max-width: 250px;
+}
+
+.x3-overall-charge-table {
+  max-width: 360px;
+}
+
+.x3-bold {
+  font-weight: 700;
+}
+
+.x3-semi {
+  font-weight: 500;
 }

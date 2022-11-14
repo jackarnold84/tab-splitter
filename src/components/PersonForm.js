@@ -2,7 +2,7 @@ import { useState } from "react";
 import { hasDuplicates, trimEntries } from '../utils';
 
 import AddRemoveButtons from "./AddRemoveButtons";
-import SubmitButton from "./SubmitButton";
+import NavButtons from "./NavButtons";
 
 const PersonForm = ({
   personList, setPersonList, setPageState
@@ -70,10 +70,10 @@ const PersonForm = ({
             handleAdd={handleAddButton} handleRemove={handleRemoveButton}
           />
           <p className="w3-center w3-small w3-text-red">{errorMessage}</p>
-          <SubmitButton label='Next >' />
+          <NavButtons nextlabel='Next >' />
         </form>
       </div>
-
+      
     </div>
   );
 }

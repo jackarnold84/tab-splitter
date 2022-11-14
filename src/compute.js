@@ -21,8 +21,8 @@ export const tabSplitResults = (personList, itemList, addedCharges) => {
     ));
 
     let total = subtotal + tax + tip;
-    let taxProportion = tax / subtotal;
-    let tipProportion = tip / subtotal;
+    let taxProportion = subtotal > 0 ? tax / subtotal : 0;
+    let tipProportion = subtotal > 0 ? tip / subtotal : 0;
 
     // create entry for each person
     let charges = Object.fromEntries(

@@ -22,7 +22,7 @@ export const anyArrayIsEmpty = (arrays) => {
 export const parseCost = (num) => {
     let res = parseFloat(parseFloat(num).toFixed(2));
     if (!res) {
-        return (0).toFixed(2);
+        return 0.00;
     } else {
         return res;
     };

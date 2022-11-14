@@ -3,7 +3,7 @@ import { dropItem, anyArrayIsEmpty, parseCost, percentDispay } from '../utils';
 import { runningSubtotal } from "../compute";
 
 import AddRemoveButtons from "./AddRemoveButtons";
-import SubmitPrevButton from "./SubmitPrevButton";
+import NavButtons from "./NavButtons";
 
 const ItemForm = ({
   itemList, setItemList, personList, addedCharges, setAddedCharges, setPageState
@@ -54,6 +54,8 @@ const ItemForm = ({
     }
     else if (anyArrayIsEmpty(itemList.map((x) => x.owner))) {
       setErrorMessage('Each item must be assigned to at least one person');
+    } else if (runningSubtotal(itemList) <= 0) {
+      setErrorMessage('Total charges must be greater than zero');
     } else {
       setPageState('ViewResults');
     }
@@ -175,7 +177,7 @@ const ItemForm = ({
           </div>
 
           <p className="w3-center w3-small w3-text-red">{errorMessage}</p>
-          <SubmitPrevButton label='Next >' prevLabel='< Prev' handlePrev={handlePrev} />
+          <NavButtons nextlabel='Next >' prevLabel='< Prev' handlePrev={handlePrev} />
         </form>
       </div>
 

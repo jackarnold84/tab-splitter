@@ -18,7 +18,7 @@ const App = () => {
   return (
     <div className='w3-container'>
       <h1 className='w3-green w3-center'>Tab Splitter</h1>
-      <div className='w3-container'>
+      <div className='w3-container x3-fit-width'>
         {pageState === 'AddPeople' &&
           <PersonForm
             personList={personList}
@@ -41,6 +41,7 @@ const App = () => {
             itemList={itemList}
             personList={personList}
             addedCharges={addedCharges}
+            setPageState={setPageState}
           />
         }
       </div>
