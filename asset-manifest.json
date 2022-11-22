@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/tab-splitter/static/css/main.8b1c763b.css",
+    "main.js": "/tab-splitter/static/js/main.bcc0baaf.js",
+    "index.html": "/tab-splitter/index.html",
+    "main.8b1c763b.css.map": "/tab-splitter/static/css/main.8b1c763b.css.map",
+    "main.bcc0baaf.js.map": "/tab-splitter/static/js/main.bcc0baaf.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8b1c763b.css",
+    "static/js/main.bcc0baaf.js"
+  ]
+}
