@@ -59,8 +59,10 @@ const PersonForm = ({
 
   return (
     <div>
-      <h3>Add People</h3>
-      <p className='w3-small'>Enter a name for each person who will be paying</p>
+      <h3 className="w3-center x3-semi">Add People</h3>
+      <div className="w3-center">
+        Enter a name for each person who will be paying
+      </div>
 
       <div className='w3-margin-top w3-margin-bottom'>
         <form onSubmit={handleSubmit} autoComplete='off'>
@@ -69,11 +71,11 @@ const PersonForm = ({
             addLabel='Add Person (+)' removeLabel='Delete Person (-)'
             handleAdd={handleAddButton} handleRemove={handleRemoveButton}
           />
-          <p className="w3-center w3-small w3-text-red">{errorMessage}</p>
+          <p className="w3-center w3-text-red">{errorMessage}</p>
           <NavButtons nextlabel='Next >' />
         </form>
       </div>
-      
+
     </div>
   );
 }

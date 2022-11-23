@@ -17,7 +17,7 @@ const App = () => {
 
   return (
     <div>
-      <h1 className='w3-green w3-center'>Tab Splitter</h1>
+      <h1 className='x3-semi w3-green w3-center'>Tab Splitter</h1>
       <div className='w3-container'>
         <div className='x3-fit-width'>
           {pageState === 'AddPeople' &&

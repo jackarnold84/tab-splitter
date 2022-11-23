@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { dropItem, anyArrayIsEmpty, parseCost, percentDispay } from '../utils';
+import { dropItem, anyArrayIsEmpty, fixCost, parseCost, percentDispay } from '../utils';
 import { runningSubtotal } from "../compute";
 
 import AddRemoveButtons from "./AddRemoveButtons";
 import NavButtons from "./NavButtons";
+import CostInput from "./CostInput";
 
 const ItemForm = ({
   itemList, setItemList, personList, addedCharges, setAddedCharges, setPageState
@@ -11,10 +12,15 @@ const ItemForm = ({
   const [errorMessage, setErrorMessage] = useState('');
   const [tipPercentage, setTipPercentage] = useState('');
 
-  const handleChange = (e, index) => {
+  const handleChange = (e, index, fix = false) => {
     let newItemList = [...itemList];
     let name = e.target.name;
-    newItemList[index][name] = e.target.value;
+    name = name === 'description' ? 'name' : name;
+    if (fix) {
+      newItemList[index][name] = fixCost(e.target.value);
+    } else {
+      newItemList[index][name] = e.target.value;
+    }
     setItemList(newItemList);
   };
 
@@ -29,10 +35,14 @@ const ItemForm = ({
     setItemList(newItemList);
   };
 
-  const handleChargesChange = (e) => {
+  const handleChargesChange = (e, fix = false) => {
     let newAddedCharges = { ...addedCharges };
     let name = e.target.name;
-    newAddedCharges[name] = e.target.value;
+    if (fix) {
+      newAddedCharges[name] = fixCost(e.target.value);
+    } else {
+      newAddedCharges[name] = e.target.value;
+    }
     setAddedCharges(newAddedCharges);
 
     if (e.target.name === 'tip') {
@@ -82,14 +92,14 @@ const ItemForm = ({
   };
 
   const itemListInputs = itemList.map((value, index) => (
-    <div className="w3-margin-top x3-margin-bottom-24" key={'item' + index}>
+    <div className="w3-margin-top x3-margin-bottom-32" key={'item' + index}>
 
       <label className="x3-label">
         Description:
         <input
           className='w3-input w3-border w3-medium x3-margin-bottom-8'
           type='text'
-          name='name'
+          name='description'
           value={value.name}
           onChange={(e) => handleChange(e, index)}
           placeholder={'Item ' + (index + 1)}
@@ -99,22 +109,18 @@ const ItemForm = ({
 
       <label className="x3-label">
         Cost ($):
-        <input
-          className='w3-input w3-border w3-medium x3-margin-bottom-8'
-          type='number'
+        <CostInput
           name='cost'
           value={value.cost}
           onChange={(e) => handleChange(e, index)}
-          placeholder='0.00'
-          step=".01"
-          min='0'
+          onBlur={(e) => handleChange(e, index, true)}
         />
       </label>
 
       <label className="x3-label">Assign:</label>
       <div className="w3-margin-bottom x3-inner-4">
         {personList.map((person) => (
-          <span className=".w3-show-inline-block" key={'item' + index + person}>
+          <span className="w3-show-inline-block" key={'item' + index + person}>
             <input
               id={'item' + index + person}
               className="w3-check"
@@ -135,28 +141,20 @@ const ItemForm = ({
     <div>
       <label className="x3-label">
         Tax ($):
-        <input
-          className='w3-input w3-border w3-medium x3-margin-bottom-4'
-          type='tel'
-          pattern="[0-9|.]*"
+        <CostInput
           name='tax'
           value={addedCharges.tax}
-          onChange={handleChargesChange}
-          step=".01"
-          placeholder='0.00'
+          onChange={(e) => handleChargesChange(e)}
+          onBlur={(e) => handleChargesChange(e, true)}
         />
       </label>
       <label className="x3-label">
         Tip ($):
-        <input
-          className='w3-input w3-border w3-medium x3-margin-bottom-4'
-          type='tel'
-          pattern="[0-9|.]*"
+        <CostInput
           name='tip'
           value={addedCharges.tip}
-          onChange={handleChargesChange}
-          step=".01"
-          placeholder='0.00'
+          onChange={(e) => handleChargesChange(e)}
+          onBlur={(e) => handleChargesChange(e, true)}
         />
         <div className="x3-tip-pct">{tipPercentage}</div>
       </label>
@@ -166,8 +164,10 @@ const ItemForm = ({
   return (
     <div>
 
-      <h3>Add Items</h3>
-      <p className='w3-small'>Add and assign people to items in the tab</p>
+      <h3 className="w3-center x3-semi">Add Items</h3>
+      <div className="w3-center">
+        Add and assign people to items in the tab
+      </div>
 
       <div className='w3-margin-top w3-margin-bottom'>
         <form onSubmit={handleSubmit} autoComplete='off'>
@@ -177,12 +177,12 @@ const ItemForm = ({
             handleAdd={handleAddButton} handleRemove={handleRemoveButton}
           />
 
-          <h3 className="x3-margin-top-32">Additional Charges</h3>
+          <h3 className="w3-center x3-semi x3-margin-top-32">Additional Charges</h3>
           <div>
             {addedChargeInputs}
           </div>
 
-          <p className="w3-center w3-small w3-text-red">{errorMessage}</p>
+          <p className="w3-center w3-text-red">{errorMessage}</p>
           <NavButtons nextlabel='Next >' prevLabel='< Prev' handlePrev={handlePrev} />
         </form>
       </div>

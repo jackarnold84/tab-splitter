@@ -73,8 +73,8 @@ const ResultsPage = ({
   );
 
   return (
-    <div>
-      <h3>Tab Results</h3>
+    <div className="x3-fit-width-narrow">
+      <h3 className="w3-center x3-semi">Tab Results</h3>
       <div className='w3-margin-top x3-margin-bottom-24'>
         <div className="w3-margin-bottom">
           {chargesByPersonDisplay}

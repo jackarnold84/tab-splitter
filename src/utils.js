@@ -28,6 +28,18 @@ export const parseCost = (num) => {
     };
 };
 
+export const fixCost = (num) => {
+    if (!num) {
+        return '0.00';
+    }
+    let res = parseFloat(num).toFixed(2);
+    if (!res) {
+        return '0.00';
+    } else {
+        return res;
+    };
+};
+
 export const round = (num, place) => {
     return parseFloat(parseFloat(num).toFixed(place));
 }
