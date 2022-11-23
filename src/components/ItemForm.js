@@ -84,10 +84,10 @@ const ItemForm = ({
   const itemListInputs = itemList.map((value, index) => (
     <div className="w3-margin-top x3-margin-bottom-24" key={'item' + index}>
 
-      <label className="w3-small">
+      <label className="x3-label">
         Description:
         <input
-          className='w3-input w3-border x3-margin-bottom-4'
+          className='w3-input w3-border w3-medium x3-margin-bottom-8'
           type='text'
           name='name'
           value={value.name}
@@ -97,10 +97,10 @@ const ItemForm = ({
         />
       </label>
 
-      <label className="w3-small">
+      <label className="x3-label">
         Cost ($):
         <input
-          className='w3-input w3-border x3-margin-bottom-4'
+          className='w3-input w3-border w3-medium x3-margin-bottom-8'
           type='number'
           name='cost'
           value={value.cost}
@@ -111,7 +111,7 @@ const ItemForm = ({
         />
       </label>
 
-      <label className="w3-small">Assign:</label>
+      <label className="x3-label">Assign:</label>
       <div className="w3-margin-bottom x3-inner-4">
         {personList.map((person) => (
           <span className=".w3-show-inline-block" key={'item' + index + person}>
@@ -132,29 +132,35 @@ const ItemForm = ({
   ));
 
   const addedChargeInputs = (
-    <label className="w3-small">
-      Tax ($):
-      <input
-        className='w3-input w3-border x3-margin-bottom-4'
-        type='text'
-        name='tax'
-        value={addedCharges.tax}
-        onChange={handleChargesChange}
-        step=".01"
-        placeholder='0.00'
-      />
-      Tip ($):
-      <input
-        className='w3-input w3-border x3-margin-bottom-4'
-        type='number'
-        name='tip'
-        value={addedCharges.tip}
-        onChange={handleChargesChange}
-        step=".01"
-        placeholder='0.00'
-      />
-      <div className="x3-tip-pct">{tipPercentage}</div>
-    </label>
+    <div>
+      <label className="x3-label">
+        Tax ($):
+        <input
+          className='w3-input w3-border w3-medium x3-margin-bottom-4'
+          type='tel'
+          pattern="[0-9|.]*"
+          name='tax'
+          value={addedCharges.tax}
+          onChange={handleChargesChange}
+          step=".01"
+          placeholder='0.00'
+        />
+      </label>
+      <label className="x3-label">
+        Tip ($):
+        <input
+          className='w3-input w3-border w3-medium x3-margin-bottom-4'
+          type='tel'
+          pattern="[0-9|.]*"
+          name='tip'
+          value={addedCharges.tip}
+          onChange={handleChargesChange}
+          step=".01"
+          placeholder='0.00'
+        />
+        <div className="x3-tip-pct">{tipPercentage}</div>
+      </label>
+    </div>
   )
 
   return (

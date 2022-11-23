@@ -16,34 +16,36 @@ const App = () => {
   );
 
   return (
-    <div className='w3-container'>
+    <div>
       <h1 className='w3-green w3-center'>Tab Splitter</h1>
-      <div className='w3-container x3-fit-width'>
-        {pageState === 'AddPeople' &&
-          <PersonForm
-            personList={personList}
-            setPersonList={setPersonList}
-            setPageState={setPageState}
-          />
-        }
-        {pageState === 'AddItems' &&
-          <ItemForm
-            itemList={itemList}
-            setItemList={setItemList}
-            personList={personList}
-            addedCharges={addedCharges}
-            setAddedCharges={setAddedCharges}
-            setPageState={setPageState}
-          />
-        }
-        {pageState === 'ViewResults' &&
-          <ResultsPage
-            itemList={itemList}
-            personList={personList}
-            addedCharges={addedCharges}
-            setPageState={setPageState}
-          />
-        }
+      <div className='w3-container'>
+        <div className='x3-fit-width'>
+          {pageState === 'AddPeople' &&
+            <PersonForm
+              personList={personList}
+              setPersonList={setPersonList}
+              setPageState={setPageState}
+            />
+          }
+          {pageState === 'AddItems' &&
+            <ItemForm
+              itemList={itemList}
+              setItemList={setItemList}
+              personList={personList}
+              addedCharges={addedCharges}
+              setAddedCharges={setAddedCharges}
+              setPageState={setPageState}
+            />
+          }
+          {pageState === 'ViewResults' &&
+            <ResultsPage
+              itemList={itemList}
+              personList={personList}
+              addedCharges={addedCharges}
+              setPageState={setPageState}
+            />
+          }
+        </div>
       </div>
     </div>
   );

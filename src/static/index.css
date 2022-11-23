@@ -220,7 +220,7 @@ textarea {
 html,
 body {
   font-family: Verdana, sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.5
 }
 
@@ -1328,7 +1328,7 @@ a {
 }
 
 .w3-medium {
-  font-size: 15px !important
+  font-size: 16px !important
 }
 
 .w3-large {
