@@ -41,7 +41,7 @@ export const clipboardDetails = (tab) => {
     text = text.concat(`Subtotal: ${costDisplay(tab.subtotal)}\n`);
     text = text.concat(`Tax: ${costDisplay(tab.tax)} (${percentDispay(tab.taxProportion)})\n`);
     text = text.concat(`Tip: ${costDisplay(tab.tip)} (${percentDispay(tab.tipProportion)})\n`);
-    text = text.concat(`Total: ${costDisplay(tab.total)}\n`);
+    text = text.concat(`Total: ${costDisplay(tab.total)}`);
 
     navigator.clipboard.writeText(text);
 }
