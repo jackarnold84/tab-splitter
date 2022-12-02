@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/tab-splitter/static/css/main.493774bb.css",
-    "main.js": "/tab-splitter/static/js/main.f86b33f2.js",
+    "main.css": "/tab-splitter/static/css/main.4b7df5f2.css",
+    "main.js": "/tab-splitter/static/js/main.dc7bea23.js",
     "index.html": "/tab-splitter/index.html",
-    "main.493774bb.css.map": "/tab-splitter/static/css/main.493774bb.css.map",
-    "main.f86b33f2.js.map": "/tab-splitter/static/js/main.f86b33f2.js.map"
+    "main.4b7df5f2.css.map": "/tab-splitter/static/css/main.4b7df5f2.css.map",
+    "main.dc7bea23.js.map": "/tab-splitter/static/js/main.dc7bea23.js.map"
   },
   "entrypoints": [
-    "static/css/main.493774bb.css",
-    "static/js/main.f86b33f2.js"
+    "static/css/main.4b7df5f2.css",
+    "static/js/main.dc7bea23.js"
   ]
 }
