@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { tabSplitResults } from "../compute";
+import { clipboardDetails, clipboardResults } from "../clipboard";
 import { costDisplay, percentDispay } from "../utils";
 import NavButtons from "./NavButtons";
 
 const ResultsPage = ({
   personList, itemList, addedCharges, setPageState
 }) => {
+  const [copyMessage, setCopyMessage] = useState('');
 
   const tab = tabSplitResults(personList, itemList, addedCharges);
 
@@ -16,6 +19,16 @@ const ResultsPage = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     setPageState('AddPeople');
+  };
+
+  const handleCopyResults = () => {
+    clipboardResults(tab);
+    setCopyMessage('Tab results copied to clipboard');
+  };
+
+  const handleCopyDetails = () => {
+    clipboardDetails(tab);
+    setCopyMessage('Tab details copied to clipboard');
   };
 
   const chargesByPersonDisplay = Object.entries(tab.charges).map(([p, x]) => (
@@ -72,9 +85,12 @@ const ResultsPage = ({
     </div>
   );
 
+  clipboardResults(tab);
+
   return (
     <div className="x3-fit-width-narrow">
       <h3 className="w3-center x3-semi">Tab Results</h3>
+
       <div className='w3-margin-top x3-margin-bottom-24'>
         <div className="w3-margin-bottom">
           {chargesByPersonDisplay}
@@ -83,8 +99,25 @@ const ResultsPage = ({
           {overallChargesDisplay}
         </div>
       </div>
+
+      <div className="w3-center x3-margin-bottom-24">
+        <input
+          className='w3-button w3-blue w3-margin-right'
+          type='button'
+          value='Copy Results'
+          onClick={handleCopyResults}
+        />
+        <input
+          className='w3-button w3-blue'
+          type='button'
+          value='Copy Details'
+          onClick={handleCopyDetails}
+        />
+        <p className="w3-center w3-text-blue">{copyMessage}</p>
+      </div>
+
       <form onSubmit={handleSubmit}>
-      <NavButtons nextlabel='Done' prevLabel='< Prev' handlePrev={handlePrev} />
+        <NavButtons nextlabel='Done' prevLabel='< Prev' handlePrev={handlePrev} />
       </form>
     </div>
   );
