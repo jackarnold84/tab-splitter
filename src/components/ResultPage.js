@@ -85,8 +85,6 @@ const ResultsPage = ({
     </div>
   );
 
-  clipboardResults(tab);
-
   return (
     <div className="x3-fit-width-narrow">
       <h3 className="w3-center x3-semi">Tab Results</h3>
