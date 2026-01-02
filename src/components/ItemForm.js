@@ -168,7 +168,7 @@ const ItemForm = ({
             type='number'
             inputMode='numeric'
             name='quantity'
-            value={value.quantity || '1'}
+            value={value.quantity}
             onChange={(e) => handleChange(e, index)}
             min='1'
             step='1'
