@@ -2,9 +2,10 @@ import { parseCost, round } from "./utils";
 
 export const runningSubtotal = (itemList) => {
     let subtotal = 0.00;
-    itemList.forEach((item) => (
-        subtotal += parseCost(item.cost)
-    ));
+    itemList.forEach((item) => {
+        const quantity = parseInt(item.quantity) || 1;
+        subtotal += parseCost(item.cost) * quantity;
+    });
     return subtotal;
 }
 
@@ -16,9 +17,10 @@ export const tabSplitResults = (personList, itemList, addedCharges) => {
     let tax = parseCost(addedCharges.tax) + parseCost(addedCharges.surcharges);
     let tip = parseCost(addedCharges.tip);
 
-    itemList.forEach((item) => (
-        subtotal += parseCost(item.cost)
-    ));
+    itemList.forEach((item) => {
+        const quantity = parseInt(item.quantity) || 1;
+        subtotal += parseCost(item.cost) * quantity;
+    });
 
     let total = subtotal + tax + tip;
     let taxProportion = subtotal > 0 ? tax / subtotal : 0;
@@ -43,13 +45,15 @@ export const tabSplitResults = (personList, itemList, addedCharges) => {
     // assign items to people
     itemList.forEach((item) => {
         let nOwners = item.owner.length;
+        const quantity = parseInt(item.quantity) || 1;
+        const itemTotalCost = parseCost(item.cost) * quantity;
         item.owner.forEach((owner) => {
             charges[owner].items.push({
                 'name': item.name,
-                'cost': parseCost(item.cost),
+                'cost': itemTotalCost,
                 'owner': item.owner,
             });
-            charges[owner].subtotal += parseCost(item.cost) / nOwners;
+            charges[owner].subtotal += itemTotalCost / nOwners;
         })
     });
 

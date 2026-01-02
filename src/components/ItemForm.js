@@ -26,6 +26,15 @@ const ItemForm = ({
     setItemList(newItemList);
   };
 
+  const handleShowQuantity = (index) => {
+    let newItemList = [...itemList];
+    newItemList[index].showQuantity = true;
+    if (!newItemList[index].quantity) {
+      newItemList[index].quantity = '1';
+    }
+    setItemList(newItemList);
+  };
+
   const handleCheckboxChange = (e, index) => {
     let newItemList = [...itemList];
     let name = e.target.name;
@@ -100,7 +109,7 @@ const ItemForm = ({
 
   const handleAddButton = (e) => {
     e.preventDefault();
-    let newItemList = [...itemList, { 'name': '', 'cost': '', 'owner': [] }];
+    let newItemList = [...itemList, { 'name': '', 'cost': '', 'quantity': '1', 'showQuantity': false, 'owner': [] }];
     setItemList(newItemList);
   };
 
@@ -128,13 +137,44 @@ const ItemForm = ({
 
       <label className="x3-label">
         Cost ($):
-        <CostInput
-          name='cost'
-          value={value.cost}
-          onChange={(e) => handleChange(e, index)}
-          onBlur={(e) => handleChange(e, index, true)}
-        />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ flex: 1 }}>
+            <CostInput
+              name='cost'
+              value={value.cost}
+              onChange={(e) => handleChange(e, index)}
+              onBlur={(e) => handleChange(e, index, true)}
+            />
+          </div>
+          {!value.showQuantity && (
+            <button
+              type="button"
+              onClick={() => handleShowQuantity(index)}
+              className="w3-button w3-circle w3-blue"
+              style={{ width: '36px', height: '36px', padding: '0', fontSize: '18px', lineHeight: '1', flexShrink: 0, marginBottom: '8px' }}
+              title="Add quantity"
+            >
+              +
+            </button>
+          )}
+        </div>
       </label>
+
+      {value.showQuantity && (
+        <label className="x3-label">
+          Quantity:
+          <input
+            className='w3-input w3-border w3-medium x3-margin-bottom-8'
+            type='number'
+            inputMode='numeric'
+            name='quantity'
+            value={value.quantity || '1'}
+            onChange={(e) => handleChange(e, index)}
+            min='1'
+            step='1'
+          />
+        </label>
+      )}
 
       <label className="x3-label">Assign:</label>
       <div className="w3-margin-bottom x3-inner-4">
