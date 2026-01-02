@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import PersonForm from "./components/PersonForm";
 import ItemForm from "./components/ItemForm";
+import PersonForm from "./components/PersonForm";
 import ResultsPage from "./components/ResultPage";
 
 const App = () => {
@@ -12,7 +12,7 @@ const App = () => {
     [{ 'name': '', 'cost': '', 'owner': [] }]
   );
   const [addedCharges, setAddedCharges] = useState(
-    { 'tax': '', 'tip': '' }
+    { 'tax': '', 'tip': '', 'surcharges': '' }
   );
 
   return (
