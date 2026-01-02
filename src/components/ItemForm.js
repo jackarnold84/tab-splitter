@@ -1,16 +1,18 @@
 import { useState } from "react";
-import { dropItem, anyArrayIsEmpty, fixCost, parseCost, percentDispay } from '../utils';
 import { runningSubtotal } from "../compute";
+import { anyArrayIsEmpty, dropItem, fixCost, parseCost, percentDispay } from '../utils';
 
 import AddRemoveButtons from "./AddRemoveButtons";
-import NavButtons from "./NavButtons";
 import CostInput from "./CostInput";
+import NavButtons from "./NavButtons";
 
 const ItemForm = ({
   itemList, setItemList, personList, addedCharges, setAddedCharges, setPageState
 }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [tipPercentage, setTipPercentage] = useState('');
+  const [taxPercentage, setTaxPercentage] = useState('');
+  const [surchargesPercentage, setSurchargesPercentage] = useState('');
 
   const handleChange = (e, index, fix = false) => {
     let newItemList = [...itemList];
@@ -45,14 +47,31 @@ const ItemForm = ({
     }
     setAddedCharges(newAddedCharges);
 
-    if (e.target.name === 'tip') {
-      const subtotal = runningSubtotal(itemList);
+    const subtotal = runningSubtotal(itemList);
+
+    if (e.target.name === 'tax') {
+      const tax = parseCost(e.target.value);
+      if (subtotal > 0 && tax > 0) {
+        const taxPercentDisplay = `→ ${percentDispay(tax / subtotal)}`;
+        setTaxPercentage(taxPercentDisplay);
+      } else {
+        setTaxPercentage('');
+      }
+    } else if (e.target.name === 'tip') {
       const tip = parseCost(e.target.value);
       if (subtotal > 0 && tip > 0) {
         const tipPercentDisplay = `→ ${percentDispay(tip / subtotal)}`;
         setTipPercentage(tipPercentDisplay);
       } else {
         setTipPercentage('');
+      }
+    } else if (e.target.name === 'surcharges') {
+      const surcharges = parseCost(e.target.value);
+      if (subtotal > 0 && surcharges > 0) {
+        const surchargesPercentDisplay = `→ ${percentDispay(surcharges / subtotal)}`;
+        setSurchargesPercentage(surchargesPercentDisplay);
+      } else {
+        setSurchargesPercentage('');
       }
     }
   };
@@ -147,6 +166,17 @@ const ItemForm = ({
           onChange={(e) => handleChargesChange(e)}
           onBlur={(e) => handleChargesChange(e, true)}
         />
+        <div className="x3-tip-pct">{taxPercentage}</div>
+      </label>
+      <label className="x3-label">
+        Surcharge ($):
+        <CostInput
+          name='surcharges'
+          value={addedCharges.surcharges}
+          onChange={(e) => handleChargesChange(e)}
+          onBlur={(e) => handleChargesChange(e, true)}
+        />
+        <div className="x3-tip-pct">{surchargesPercentage}</div>
       </label>
       <label className="x3-label">
         Tip ($):

@@ -13,7 +13,7 @@ export const tabSplitResults = (personList, itemList, addedCharges) => {
 
     // compute totals
     let subtotal = 0.00;
-    let tax = parseCost(addedCharges.tax);
+    let tax = parseCost(addedCharges.tax) + parseCost(addedCharges.surcharges);
     let tip = parseCost(addedCharges.tip);
 
     itemList.forEach((item) => (

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { tabSplitResults } from "../compute";
 import { clipboardDetails, clipboardResults } from "../clipboard";
+import { tabSplitResults } from "../compute";
 import { costDisplay, percentDispay } from "../utils";
 import NavButtons from "./NavButtons";
 
@@ -67,7 +67,7 @@ const ResultsPage = ({
             <td>{costDisplay(tab.subtotal)}</td>
           </tr>
           <tr>
-            <td>Tax:</td>
+            <td>Tax + Surcharge:</td>
             <td>{costDisplay(tab.tax)}</td>
             <td>({percentDispay(tab.taxProportion)})</td>
           </tr>
